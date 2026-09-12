@@ -1,9 +1,13 @@
 package com.app.financial_platform.model;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table (name="categories")
+@Getter
+@Setter
 public class Category {
 
     @Id
@@ -11,18 +15,4 @@ public class Category {
     private long id;
     private String name;
 
-    public long getId() {
-        return id;
-    }
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 }

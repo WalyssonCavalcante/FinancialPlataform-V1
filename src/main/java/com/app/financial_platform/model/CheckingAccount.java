@@ -1,17 +1,17 @@
 package com.app.financial_platform.model;
 
 import jakarta.persistence.Entity;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 
 @Entity
+@Getter
+@Setter
 public class CheckingAccount extends Account {
 
     private BigDecimal overdraftLimit;
-
-    public void setOverdraftLimit(BigDecimal limit){
-        this.overdraftLimit = limit;
-    }
 
     public void withdraw(BigDecimal amount){
         BigDecimal maxAvailable = this.getBalance().add(this.overdraftLimit);

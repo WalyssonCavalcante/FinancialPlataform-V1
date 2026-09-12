@@ -1,5 +1,6 @@
 package com.app.financial_platform.controller;
 
+import com.app.financial_platform.dto.UserRequestDTO;
 import com.app.financial_platform.model.User;
 import com.app.financial_platform.repository.UserRepository;
 import com.app.financial_platform.service.UserService;
@@ -17,7 +18,7 @@ public class UserController {
     private UserService userService;
 
     @PostMapping
-    public User createUser(@RequestBody User user){
-        return userService.createUser(user);
+    public User createUser(@RequestBody UserRequestDTO dto){
+        return userService.createUser(dto);
     }
 }

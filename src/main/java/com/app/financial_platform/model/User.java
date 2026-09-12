@@ -1,9 +1,13 @@
 package com.app.financial_platform.model;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table (name="users")
+@Getter
+@Setter
 public class User {
 
     @Id
@@ -12,26 +16,6 @@ public class User {
 
     private String name;
     private String email;
-
-    public long getId() {
-        return this.id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return this.name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmail() {
-        return this.email;
-    }
 
     public void setEmail(String email) {
         if (email != null && email.contains("@")) {
