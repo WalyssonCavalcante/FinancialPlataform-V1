@@ -18,7 +18,7 @@ public class UserController {
     private UserService userService;
 
     @PostMapping
-    public User createUser(@RequestBody UserRequestDTO dto){
+    public User createUser(@jakarta.validation.Valid @RequestBody UserRequestDTO dto){
         return userService.createUser(dto);
     }
 }
