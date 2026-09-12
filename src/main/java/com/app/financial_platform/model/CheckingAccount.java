@@ -1,7 +1,10 @@
 package com.app.financial_platform.model;
 
+import jakarta.persistence.Entity;
+
 import java.math.BigDecimal;
 
+@Entity
 public class CheckingAccount extends Account {
 
     private BigDecimal overdraftLimit;
