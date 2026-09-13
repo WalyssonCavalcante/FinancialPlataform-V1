@@ -13,10 +13,10 @@ public class CheckingAccount extends Account {
 
     private BigDecimal overdraftLimit;
 
-    public void withdraw(BigDecimal amount){
+    public void withdraw(BigDecimal amount) {
         BigDecimal maxAvailable = this.getBalance().add(this.overdraftLimit);
 
-        if (amount.compareTo(maxAvailable) > 0){
+        if (amount.compareTo(maxAvailable) > 0) {
             throw new IllegalArgumentException("Saque negado! Seu limite disponível é de apenas R$ " + maxAvailable);
         }
 

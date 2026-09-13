@@ -14,7 +14,7 @@ public class CategoryService {
     private CategoryRepository categoryRepository;
 
     public Category createCategory(CategoryRequestDTO dto) {
-    if (categoryRepository.existsByName(dto.name())){
+        if (categoryRepository.existsByName(dto.name())) {
             throw new IllegalArgumentException("Erro: Essa categoria já existe");
         }
 

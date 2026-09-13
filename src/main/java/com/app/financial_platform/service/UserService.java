@@ -16,8 +16,8 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public User createUser(UserRequestDTO dto){
-        if (userRepository.existsByEmail(dto.email())){
+    public User createUser(UserRequestDTO dto) {
+        if (userRepository.existsByEmail(dto.email())) {
             throw new IllegalArgumentException("Erro: Esse e-mail já existe");
         }
 
@@ -29,18 +29,18 @@ public class UserService {
         return userRepository.save(newUser);
     }
 
-    public List<UserResponseDTO> getAllUsers(){
+    public List<UserResponseDTO> getAllUsers() {
         return userRepository.findAll()
                 .stream()
                 .map(user -> new UserResponseDTO(user))
                 .toList();
     }
 
-    public UserResponseDTO login(LoginRequestDTO dto){
+    public UserResponseDTO login(LoginRequestDTO dto) {
         User user = userRepository.findByEmail(dto.email())
                 .orElseThrow(() -> new IllegalArgumentException("Erro: E-mail não encontrado"));
 
-        if (!user.getPassword().equals(dto.password())){
+        if (!user.getPassword().equals(dto.password())) {
             throw new IllegalArgumentException("Erro: Senha incorreta");
         }
 

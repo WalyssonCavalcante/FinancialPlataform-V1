@@ -18,17 +18,17 @@ public class UserController {
     private UserService userService;
 
     @PostMapping
-    public User createUser(@jakarta.validation.Valid @RequestBody UserRequestDTO dto){
+    public User createUser(@jakarta.validation.Valid @RequestBody UserRequestDTO dto) {
         return userService.createUser(dto);
     }
 
     @GetMapping
-    public List<UserResponseDTO> listUsers(){
+    public List<UserResponseDTO> listUsers() {
         return userService.getAllUsers();
     }
 
     @PostMapping("/login")
-    public UserResponseDTO login(@jakarta.validation.Valid @RequestBody LoginRequestDTO dto){
+    public UserResponseDTO login(@jakarta.validation.Valid @RequestBody LoginRequestDTO dto) {
         return userService.login(dto);
     }
 }

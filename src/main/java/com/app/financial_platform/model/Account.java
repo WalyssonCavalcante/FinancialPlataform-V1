@@ -24,10 +24,10 @@ public abstract class Account {
     @OneToMany(mappedBy = "account")
     private List<Transaction> transactions = new ArrayList<>();
 
-    public void addTransaction(Transaction t){
+    public void addTransaction(Transaction t) {
         this.transactions.add(t);
 
-        if (t.getType() == TransactionType.INCOME){
+        if (t.getType() == TransactionType.INCOME) {
             this.balance = this.balance.add(t.getAmount());
         } else if (t.getType() == TransactionType.EXPENSE) {
             this.balance = this.balance.subtract(t.getAmount());
