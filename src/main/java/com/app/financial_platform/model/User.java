@@ -16,6 +16,7 @@ public class User {
 
     private String name;
     private String email;
+    private String password;
 
     public void setEmail(String email) {
         if (email != null && email.contains("@")) {

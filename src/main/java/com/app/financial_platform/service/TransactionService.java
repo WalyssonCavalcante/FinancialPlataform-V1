@@ -9,14 +9,17 @@ import com.app.financial_platform.repository.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 @Service
 public class TransactionService {
+
     @Autowired
     private TransactionRepository transactionRepository;
     @Autowired
     private AccountRepository accountRepository;
     @Autowired
     private CategoryRepository categoryRepository;
+
     @Transactional
     public Transaction createTransaction(TransactionRequestDTO dto) {
         Account account = accountRepository.findById(dto.accountId())
