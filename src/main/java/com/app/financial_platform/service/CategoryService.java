@@ -20,7 +20,14 @@ public class CategoryService {
 
         Category newCategory = new Category();
         newCategory.setName(dto.name());
+        newCategory.setIcon(dto.icon() != null ? dto.icon() : "default-icon.svg");
+        newCategory.setColor(dto.color() != null ? dto.color() : "#9ca3af");
+        newCategory.setType(dto.type() != null ? dto.type() : com.app.financial_platform.model.TransactionType.EXPENSE);
 
         return categoryRepository.save(newCategory);
+    }
+
+    public java.util.List<Category> getAllCategories() {
+        return categoryRepository.findAll();
     }
 }

@@ -19,6 +19,12 @@ public class AccountService {
         account.setName(dto.name());
         account.setBalance(BigDecimal.ZERO);
         account.setOverdraftLimit(new BigDecimal("100.00"));
+        account.setUserId(dto.userId());
         return accountRepository.save(account);
+    }
+
+    public java.util.List<Account> getAccountsByUserId(Long userId) {
+        if (userId == null) return accountRepository.findAll();
+        return accountRepository.findAll().stream().filter(a -> userId.equals(a.getUserId())).toList();
     }
 }

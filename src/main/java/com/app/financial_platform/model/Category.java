@@ -14,5 +14,9 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
-
+    private String icon;
+    private String color;
+    
+    @Enumerated(EnumType.STRING)
+    private TransactionType type;
 }

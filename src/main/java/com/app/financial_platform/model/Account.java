@@ -20,7 +20,9 @@ public abstract class Account {
     private String name;
     private BigDecimal balance;
     private AccountType type;
+    private Long userId;
 
+    @com.fasterxml.jackson.annotation.JsonIgnore
     @OneToMany(mappedBy = "account")
     private List<Transaction> transactions = new ArrayList<>();
 

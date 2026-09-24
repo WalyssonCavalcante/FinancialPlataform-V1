@@ -28,6 +28,8 @@ public class TransactionService {
         Category category = categoryRepository.findById(dto.categoryId())
                 .orElseThrow(() -> new IllegalArgumentException("Categoria não encontrada"));
         Transaction transaction = new Transaction();
+        transaction.setDescription(dto.description() != null ? dto.description() : "Transação");
+        transaction.setDate(java.time.LocalDate.now());
         transaction.setAmount(dto.amount());
         transaction.setType(dto.type());
         transaction.setAccount(account);
@@ -35,5 +37,12 @@ public class TransactionService {
         account.addTransaction(transaction);
         accountRepository.save(account);
         return transactionRepository.save(transaction);
+    }
+
+    public java.util.List<Transaction> getTransactionsByUserId(Long userId) {
+        if (userId == null) return transactionRepository.findAll();
+        return transactionRepository.findAll().stream()
+                .filter(t -> t.getAccount() != null && userId.equals(t.getAccount().getUserId()))
+                .toList();
     }
 }
