@@ -6,7 +6,6 @@ import com.app.financial_platform.dto.UserResponseDTO;
 import com.app.financial_platform.model.User;
 import com.app.financial_platform.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -20,11 +19,10 @@ public class UserService {
 
     public User createUser(UserRequestDTO dto) {
         if (userRepository.existsByEmail(dto.email())) {
-            throw new IllegalArgumentException("Erro: Esse e-mail j√° existe");
+            throw new IllegalArgumentException("Erro: Esse e-mail j· existe");
         }
 
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-
         String passwordEncrypted = encoder.encode(dto.password());
 
         User newUser = new User();
@@ -35,7 +33,6 @@ public class UserService {
         return userRepository.save(newUser);
     }
 
-
     public List<UserResponseDTO> getAllUsers() {
         return userRepository.findAll()
                 .stream()
@@ -45,7 +42,7 @@ public class UserService {
 
     public UserResponseDTO login(LoginRequestDTO dto) {
         User user = userRepository.findByEmail(dto.email())
-                .orElseThrow(() -> new IllegalArgumentException("Erro: E-mail n√£o encontrado"));
+                .orElseThrow(() -> new IllegalArgumentException("Erro: E-mail n„o encontrado"));
 
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
@@ -53,6 +50,23 @@ public class UserService {
             throw new IllegalArgumentException("Erro: Senha incorreta");
         }
 
+        return new UserResponseDTO(user);
+    }
+
+    public UserResponseDTO updateUser(Long id, com.app.financial_platform.dto.UserUpdateRequestDTO dto) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Erro: Usu·rio n„o encontrado"));
+
+        if (dto.name() != null && !dto.name().trim().isEmpty()) {
+            user.setName(dto.name());
+        }
+
+        if (dto.password() != null && !dto.password().trim().isEmpty()) {
+            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+            user.setPassword(encoder.encode(dto.password()));
+        }
+
+        userRepository.save(user);
         return new UserResponseDTO(user);
     }
 }

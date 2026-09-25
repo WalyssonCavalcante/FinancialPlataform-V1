@@ -32,4 +32,10 @@ public class UserController {
     public UserResponseDTO login(@jakarta.validation.Valid @RequestBody LoginRequestDTO dto) {
         return userService.login(dto);
     }
+
+    @PutMapping("/{id}")
+    public UserResponseDTO updateUser(@PathVariable Long id, @RequestBody com.app.financial_platform.dto.UserUpdateRequestDTO dto) {
+        return userService.updateUser(id, dto);
+    }
 }
+

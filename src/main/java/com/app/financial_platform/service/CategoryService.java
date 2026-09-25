@@ -30,4 +30,10 @@ public class CategoryService {
     public java.util.List<Category> getAllCategories() {
         return categoryRepository.findAll();
     }
+
+    public Category updateCategoryLimit(Long id, Double limit) {
+        Category category = categoryRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Categoria não encontrada"));
+        category.setMonthlyLimit(limit);
+        return categoryRepository.save(category);
+    }
 }

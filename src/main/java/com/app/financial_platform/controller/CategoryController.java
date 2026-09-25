@@ -27,4 +27,12 @@ public class CategoryController {
     public java.util.List<Category> getAllCategories() {
         return categoryService.getAllCategories();
     }
+
+    @org.springframework.web.bind.annotation.PatchMapping("/{id}/limit")
+    public Category updateCategoryLimit(
+            @org.springframework.web.bind.annotation.PathVariable Long id,
+            @RequestBody java.util.Map<String, Double> payload) {
+        Double limit = payload.get("limit");
+        return categoryService.updateCategoryLimit(id, limit);
+    }
 }
